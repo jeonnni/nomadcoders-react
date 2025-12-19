@@ -5,36 +5,56 @@
 </body>
 
     <!-- React JS, ReactDOM 코드 import -->
+    <!-- ReactDOM: React element를 브라우저 DOM에 렌더링하기 위한 라이브러리 -->
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    
-    <script>
+    <!-- babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
         const root = document.getElementById("root");
-        const title = React.createElement(
-            "h3",
-            {
-                class:'title',
-                onMouseEnter:()=>console.log("onmouseenter"),
-            },
-            "hello",
+        const title = (
+            <h3 className="title" 
+                onMouseEnter={()=> 
+                    console.log("onmouseenter")
+                }
+            >
+                hello
+            </h3>
         );
+        const btn = (
+            <button 
+                onClick={()=> console.log("click")} 
+                style={{backgroundColor:"tomato"}}
+            >
+                Click Me
+            </button>
+        );
+            
+        // const title = React.createElement(
+        //     "h3",
+        //     {
+        //         class:'title',
+        //         onMouseEnter:()=>console.log("onmouseenter"),
+        //     },
+        //     "hello",
+        // );
 
         // 엘리먼트 타입
         // props (속성 + 이벤트 핸들러)
         // children (내부 콘텐츠)
-        const btn = React.createElement(
-            "button", 
-            {
-                onClick:()=>console.log("click"),
-                style:{
-                    backgroundColor:"tomato",
-                },
-            }, 
-            "Click Me",
-        );
+        // const btn = React.createElement(
+        //     "button", 
+        //     {
+        //         onClick:()=>console.log("click"),
+        //         style:{
+        //             backgroundColor:"tomato",
+        //         },
+        //     }, 
+        //     "Click Me",
+        // );
 
         // 여러 자식일 때 배열 사용
-        const container = React.createElement("div",{id:"root"},[title,btn]);
+        const container = React.createElement("div",null,[title,btn]);
         // React 엘리먼트를 실제 DOM(root)에 렌더링
         ReactDOM.createRoot(root).render(container);
     </script>
