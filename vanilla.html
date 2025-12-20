@@ -15,10 +15,10 @@
         const title = (
             <h3 className="title" 
                 onMouseEnter={()=> 
-                    console.log("onmouseenter")
+                    console.log("title")
                 }
             >
-                hello
+                Hello
             </h3>
         );
         const btn = (
@@ -26,7 +26,7 @@
                 onClick={()=> console.log("click")} 
                 style={{backgroundColor:"tomato"}}
             >
-                Click Me
+                Click me
             </button>
         );
             
@@ -53,6 +53,7 @@
         //     "Click Me",
         // );
 
+        
         // 여러 자식일 때 배열 사용
         const container = React.createElement("div",null,[title,btn]);
         // React 엘리먼트를 실제 DOM(root)에 렌더링
