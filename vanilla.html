@@ -12,7 +12,7 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
         const root = document.getElementById("root");
-        const title = (
+        const Title = () => (
             <h3 className="title" 
                 onMouseEnter={()=> 
                     console.log("title")
@@ -21,7 +21,7 @@
                 Hello
             </h3>
         );
-        const btn = (
+        const Btn = () => (
             <button 
                 onClick={()=> console.log("click")} 
                 style={{backgroundColor:"tomato"}}
@@ -29,6 +29,15 @@
                 Click me
             </button>
         );
+        const Container = () => (
+            <div>
+                <Title/> 
+                <Btn/>
+                <Btn/>
+                <Btn/>
+                <Btn/>
+            </div>
+        )
             
         // const title = React.createElement(
         //     "h3",
@@ -53,10 +62,10 @@
         //     "Click Me",
         // );
 
-        
+
         // 여러 자식일 때 배열 사용
-        const container = React.createElement("div",null,[title,btn]);
+        // const container = React.createElement("div",null,[title,btn]);
         // React 엘리먼트를 실제 DOM(root)에 렌더링
-        ReactDOM.createRoot(root).render(container);
+        ReactDOM.createRoot(root).render(<Container/>);
     </script>
 </html>
