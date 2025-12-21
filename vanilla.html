@@ -11,14 +11,11 @@
     <!-- babel -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
-        const root = document.getElementById("root");
+        const root = ReactDOM.createRoot(document.getElementById("root"));
         let counter = 0;
         function countUp (){
             counter = counter+1
             render()
-        }
-        function render (){
-            ReactDOM.createRoot(root).render(<Container/>);
         }
         function Container(){
             return(
@@ -28,7 +25,9 @@
                 </div>
             )
         };
-        render()
-
+        function render() {
+            root.render(<Container />);
+        }
+        render();
     </script>
 </html>
