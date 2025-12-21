@@ -12,60 +12,23 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
         const root = document.getElementById("root");
-        const Title = () => (
-            <h3 className="title" 
-                onMouseEnter={()=> 
-                    console.log("title")
-                }
-            >
-                Hello
-            </h3>
-        );
-        const Btn = () => (
-            <button 
-                onClick={()=> console.log("click")} 
-                style={{backgroundColor:"tomato"}}
-            >
-                Click me
-            </button>
-        );
-        const Container = () => (
-            <div>
-                <Title/> 
-                <Btn/>
-                <Btn/>
-                <Btn/>
-                <Btn/>
-            </div>
-        )
-            
-        // const title = React.createElement(
-        //     "h3",
-        //     {
-        //         class:'title',
-        //         onMouseEnter:()=>console.log("onmouseenter"),
-        //     },
-        //     "hello",
-        // );
+        let counter = 0;
+        function countUp (){
+            counter = counter+1
+            render()
+        }
+        function render (){
+            ReactDOM.createRoot(root).render(<Container/>);
+        }
+        function Container(){
+            return(
+                <div>
+                    <h3>Total clicks: {counter}</h3>
+                    <button onClick={countUp}>Click Me</button>
+                </div>
+            )
+        };
+        render()
 
-        // 엘리먼트 타입
-        // props (속성 + 이벤트 핸들러)
-        // children (내부 콘텐츠)
-        // const btn = React.createElement(
-        //     "button", 
-        //     {
-        //         onClick:()=>console.log("click"),
-        //         style:{
-        //             backgroundColor:"tomato",
-        //         },
-        //     }, 
-        //     "Click Me",
-        // );
-
-
-        // 여러 자식일 때 배열 사용
-        // const container = React.createElement("div",null,[title,btn]);
-        // React 엘리먼트를 실제 DOM(root)에 렌더링
-        ReactDOM.createRoot(root).render(<Container/>);
     </script>
 </html>
