@@ -15,8 +15,11 @@
         function App(){
             const [counter,setCounter] = React.useState(0);
             function onClick (){
-                setCounter(counter+1);
-                console.log(counter);
+                // 1. 직접 값 설정
+                // setCounter(counter+1);
+
+                // 1. 함수형 업데이트
+                setCounter((current)=> current+1);
             };
             
             return(
