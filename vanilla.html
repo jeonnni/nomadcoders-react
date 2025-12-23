@@ -6,29 +6,28 @@
 
     <!-- React JS, ReactDOM 코드 import -->
     <!-- ReactDOM: React element를 브라우저 DOM에 렌더링하기 위한 라이브러리 -->
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <!-- babel -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
-        const root = ReactDOM.createRoot(document.getElementById("root"));
         function App(){
-            const [counter,setCounter] = React.useState(0);
-            function onClick (){
-                // 1. 직접 값 설정
-                // setCounter(counter+1);
-
-                // 1. 함수형 업데이트
-                setCounter((current)=> current+1);
-            };
-            
+            const [minutes, setMinutes] = React.useState();
+            function onChange(){
+                console.log("test");
+                
+            }
             return(
                 <div>
-                    <h3>Total clicks:{counter}</h3>
-                    <button onClick={onClick}>Click Me</button>
-                </div>
+                    <h1>Super Converter</h1>
+                    <label htmlFor="minutes">Minutes</label>
+                    <input id="minutes" placeholder="Minutes" type="number" value={minutes} onChange={onChange}/>
+                    <label htmlFor="hours">Hours</label>
+                    <input id="hours" placeholder="Hours" type="number"/>
+                    </div>
             );
         }
+        const root = ReactDOM.createRoot(document.getElementById("root"));
         root.render(<App/>);
     </script>
 </html>
