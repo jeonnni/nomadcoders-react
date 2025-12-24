@@ -13,8 +13,10 @@
     <script type="text/babel">
         function App(){
             const [minutes, setMinutes] = React.useState();
-            function onChange(){
+            function onChange(e){
                 console.log("test");
+                setMinutes(e.target.value);
+                console.log(minutes);
                 
             }
             return(
@@ -22,6 +24,7 @@
                     <h1>Super Converter</h1>
                     <label htmlFor="minutes">Minutes</label>
                     <input id="minutes" placeholder="Minutes" type="number" value={minutes} onChange={onChange}/>
+                    <h4>You want to convert {minutes}</h4>
                     <label htmlFor="hours">Hours</label>
                     <input id="hours" placeholder="Hours" type="number"/>
                     </div>
