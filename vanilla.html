@@ -13,24 +13,29 @@
     <script type="text/babel">
         function App(){
             const [minutes, setMinutes] = React.useState(0);
+            const [flipped, setFlipped] = React.useState(false);
             function onChange(e){
                 setMinutes(e.target.value);
             }
-            function reset(){
+            const reset = () => {
                 setMinutes(0);
+            }
+            const onFlip = () => {
+                setFlipped((current)=> !current);
             }
             return(
                 <div>
                     <h1>Super Converter</h1>
                     <div>
                         <label htmlFor="minutes">Minutes</label>
-                        <input id="minutes" placeholder="Minutes" type="number" value={minutes} onChange={onChange}/>
+                        <input id="minutes" placeholder="Minutes" type="number" value={minutes} onChange={onChange} disabled={!flipped}/>
                     </div>
                     <div>
                         <label htmlFor="hours">Hours</label>
-                        <input id="hours" placeholder="Hours" type="number" value={Math.round(minutes/60)}/>
+                        <input id="hours" placeholder="Hours" type="number" value={Math.round(minutes/60)} disabled={flipped}/>
                     </div>
                     <button onClick={reset}>Reset</button>
+                    <button onClick={onFlip}>Flip</button>
                 </div>
             );
         }
