@@ -3,7 +3,6 @@
 <body>
     <div id="root"></div>
 </body>
-
     <!-- React JS, ReactDOM 코드 import -->
     <!-- ReactDOM: React element를 브라우저 DOM에 렌더링하기 위한 라이브러리 -->
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
@@ -11,64 +10,69 @@
     <!-- babel -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
-        function MinutesToHours(){
+
+        function Converter({ unitA, unitB, formula , idA, idB}){
             const [amount, setAmount] = React.useState(0);
             const [inverted, setInverted] = React.useState(false);
+
             const reset = () => setAmount(0);
             const onInvert = () => {
                 reset();
                 setInverted((current)=> !current);
             };
-            function onChange(e){
-                setAmount(e.target.value);
-            };
+            const onChange = (e) => setAmount(e.target.value);
 
-            return <>
+            return (
+                <>
                     <div>
-                        <label htmlFor="minutes">Minutes</label>
+                        {/* inverted 상태에 따라 label과 계산식 변경 */}
+                        <label htmlFor={idA}>{unitA}</label>
                         <input 
-                            id="minutes" 
+                            id={idA}
                             type="number" 
-                            placeholder="Minutes" 
+                            placeholder={unitA} 
                             onChange={onChange} 
-                            value={inverted ? amount * 60 : amount} 
+                            value={inverted ? Math.floor(amount * (1/formula)) : amount} 
                             disabled={inverted}
                         />
                     </div>
                     <div>
-                        <label htmlFor="hours">Hours</label>
+                        <label htmlFor={idB}>{unitB}</label>
                         <input 
-                            id="hours" 
+                            id={idB} 
                             type="number" 
-                            placeholder="Hours" 
+                            placeholder={unitB}  
                             onChange={onChange} 
-                            value={inverted ? amount : Math.round(amount/60)} 
+                            value={inverted ? amount : Math.floor(amount * formula)} 
                             disabled={!inverted}
                         />
                     </div>
                     <button onClick={reset}>Reset</button>
                     <button onClick={onInvert}>{inverted? 'Turn back': 'invert'}</button>
-            </>
+                </>
+            )
         }
-        function KmToMiles(){
-            return <h1>KM 2 M</h1>
-        }
+        
         function App(){ 
             const [index, setIndex] = React.useState("0");
             const onSelect = (e) => {
                 console.log(e.target.value);
                 setIndex(e.target.value);
                 console.log(`${index} : TEST` );
-                
-            }           
+            }    
+            
             return(
                 <div>
-                    <h1>test</h1>
+                    <h1>Super Converter</h1>
                     <select value={index} onChange={onSelect}>
-                        <option value="0">Minutes & Hours</option>
-                        <option value="1">Km & Miles</option>
+                        <option value="0">plz selet options</option>
+                        <option value="1">Minutes & Hours</option>
+                        <option value="2">Km & Miles</option>
                     </select>
-                    {index === "0" ? <MinutesToHours/> : <KmToMiles/>}
+                    <hr />
+
+                    {index === "1" ? <Converter unitA="Minutes" unitB="Hours" formula={1/60} idA="minutes" idB="hours"/> : null}
+                    {index === "2" ? <Converter unitA="Km" unitB="Miles" formula={0.621371} idA="km" idB="miles"/> : null}
                 </div>
             );
         }
