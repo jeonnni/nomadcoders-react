@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
     <div id="root"></div>
 </body>
@@ -24,55 +30,60 @@
 
             return (
                 <>
-                    <div>
-                        {/* inverted 상태에 따라 label과 계산식 변경 */}
-                        <label htmlFor={idA}>{unitA}</label>
-                        <input 
-                            id={idA}
-                            type="number" 
-                            placeholder={unitA} 
-                            onChange={onChange} 
-                            value={inverted ? Math.floor(amount * (1/formula)) : amount} 
-                            disabled={inverted}
-                        />
+                    <div className="converter-row">
+                        <div className="input-group">
+                            {/* inverted 상태에 따라 label과 계산식 변경 */}
+                            <label htmlFor={idA}>{unitA}</label>
+                            <input 
+                                id={idA}
+                                type="number" 
+                                placeholder={unitA} 
+                                onChange={onChange} 
+                                value={inverted ? Math.floor(amount * (1/formula)) : amount} 
+                                disabled={inverted}
+                            />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor={idB}>{unitB}</label>
+                            <input 
+                                id={idB} 
+                                type="number" 
+                                placeholder={unitB}  
+                                onChange={onChange} 
+                                value={inverted ? amount : Math.floor(amount * formula)} 
+                                disabled={!inverted}
+                            />
+                        </div>
                     </div>
-                    <div>
-                        <label htmlFor={idB}>{unitB}</label>
-                        <input 
-                            id={idB} 
-                            type="number" 
-                            placeholder={unitB}  
-                            onChange={onChange} 
-                            value={inverted ? amount : Math.floor(amount * formula)} 
-                            disabled={!inverted}
-                        />
+                    <div className="button-group">
+                        <button onClick={reset}>Reset</button>
+                        <button onClick={onInvert}>{inverted? 'Turn back': 'invert'}</button>
                     </div>
-                    <button onClick={reset}>Reset</button>
-                    <button onClick={onInvert}>{inverted? 'Turn back': 'invert'}</button>
                 </>
             )
         }
-        
+
         function App(){ 
             const [index, setIndex] = React.useState("0");
             const onSelect = (e) => {
-                console.log(e.target.value);
+                // console.log(e.target.value);
                 setIndex(e.target.value);
-                console.log(`${index} : TEST` );
+                // console.log(`${index} : TEST` );
             }    
             
             return(
-                <div>
+                <div id="root-container">
                     <h1>Super Converter</h1>
                     <select value={index} onChange={onSelect}>
                         <option value="0">plz selet options</option>
                         <option value="1">Minutes & Hours</option>
                         <option value="2">Km & Miles</option>
                     </select>
-                    <hr />
-
-                    {index === "1" ? <Converter unitA="Minutes" unitB="Hours" formula={1/60} idA="minutes" idB="hours"/> : null}
-                    {index === "2" ? <Converter unitA="Km" unitB="Miles" formula={0.621371} idA="km" idB="miles"/> : null}
+                    <div className="converter-container">
+                        {index === "0" ? <p>Please select your units above!</p> : null}
+                        {index === "1" ? <Converter unitA="Minutes" unitB="Hours" formula={1/60} idA="minutes" idB="hours"/> : null}
+                        {index === "2" ? <Converter unitA="Km" unitB="Miles" formula={0.621371} idA="km" idB="miles"/> : null}
+                    </div>
                 </div>
             );
         }
